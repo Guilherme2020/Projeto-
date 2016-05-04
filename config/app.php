@@ -156,6 +156,8 @@ return [
         certificado\Providers\EventServiceProvider::class,
         certificado\Providers\RouteServiceProvider::class,
 
+        ///
+
     ],
 
     /*

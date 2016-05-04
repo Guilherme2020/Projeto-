@@ -23,8 +23,13 @@
                 <td>{{$p->nome}}</td>
                 <td>{{ $p->cpf }}</td>
                 <td>{{$p->email}}</td>
-                <td><a>Editar</a></td>
-                <td><a>Excluir</a></td>
+                <td>
+                    <a class="" href="{{'/participante/edit/'.$p->id}}">Editar</a>
+
+                </td>
+                <td>
+                    <a href="{{'/participante/delete/'.$p->id}}">Excluir</a>
+                </td>
             </tr>
         @endforeach
  </table>

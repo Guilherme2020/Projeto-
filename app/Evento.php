@@ -6,7 +6,7 @@ class Evento extends Model{
 
     protected $table = 'evento';
     public $timestamps = false;
-    protected $fillable = ['nome','status','data_evento'];
+    protected $fillable = ['nome','status','data_evento','user_id','slug'];
 
 }
 ?>

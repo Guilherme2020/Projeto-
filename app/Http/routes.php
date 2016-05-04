@@ -37,10 +37,32 @@ Route::group(['middleware' => ['web']], function () {
 
 	Route::get('/participante/novo','ParticipanteController@novo');
 
+	Route::get('/participante/edit/{id}','ParticipanteController@edit');
+	Route::post('/participante/edit/{id}','ParticipanteController@update');
+	Route::get('/participante/delete/{id}','ParticipanteController@delete');
 
 });
 
 Route::group(['middleware' => ['web', 'auth']], function () {
+
+	//Evento:
+
+	Route::get('evento/add','EventoController@adicionar');
+	Route::post('evento/add','EventoController@save');
+	Route::get('evento','EventoController@lista');
+	//Evento do coordenador
+
+	//Rotas para o participante se cadastrar
+	Route::get('evento/cadastro/{slug}','EventoController@cadastrar');
+	Route::post('evento/cadastro/{slug}','EventoController@inserirInscricao');
+
+
+	Route::get('evento/edit/{id}','EventoController@edit');
+	Route::post('evento/edit/{id}','EventoController@update');
+	Route::get('evento/participantes/{id}','EventoController@ver');
+	Route::get('evento/delete/{id}','EventoController@delete');
+
+
 	//Login, Logout:
 	Route::get('auth/login', 'Auth\AuthController@getLogin');
 	Route::post('auth/login', 'Auth\AuthController@postLogin');

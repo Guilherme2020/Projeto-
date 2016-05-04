@@ -111,12 +111,12 @@ class AuthController extends Controller{
 
     public function postLogin(LoginRequest $request){
 
-        if ($this->auth->attempt($request->only('email', 'password'))){
+        if ($this->auth->attempt($request->only('matricula', 'password'))){
             return redirect('/dashboard');
         }
 
         return redirect('/auth/login')->withErrors([
-            'email' => 'Email ou senha errado tente novamente!',
+            'matricula' => 'Matricula ou senha errados tente novamente!',
         ]);
     }
     //Fim Login;

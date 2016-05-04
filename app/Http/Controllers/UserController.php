@@ -14,7 +14,7 @@ class UserController extends Controller{
 
     public function toDashboard(){
         if(Auth::user()){
-            $saida = Auth::user()['tipo'] == "G" ? 'certificado.gerente' : 'certificado.coordenador';
+            $saida = Auth::user()->tipo == 'G' ? 'certificado.gerente' : 'certificado.coordenador';
             return view($saida);
         }
         return redirect('/');
@@ -22,7 +22,7 @@ class UserController extends Controller{
 
     public function getAdd(){
         //Simple ACL:
-        if(Auth::user()['tipo'] == 'C')
+        if(Auth::user()->tipo == 'C')
             return redirect('dashboard');
 
         return view('users.add');
@@ -30,6 +30,10 @@ class UserController extends Controller{
 
     public function postAdd(UserRequest $request){
         //Gravando:
+        $vetor = $request->all();
+        $vetor['password'] = bcrypt($vetor['password']);
+        $id = User::create($vetor);
+        /*
         User::create([
             'nome' => $request['nome'],
             'username'=> $request['username'],
@@ -40,8 +44,12 @@ class UserController extends Controller{
             'password' => bcrypt($request['password']),
             'tipo' => 'C',
         ]);
-
+        */
         //Simple ACL:
+//        if($vetor['tipo'] == 'C'){
+//            return redirect('evento/add')->with('usuario', $id);
+//        }
+
         return redirect('dashboard');
     }
 

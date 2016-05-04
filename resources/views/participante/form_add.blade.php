@@ -26,5 +26,11 @@
 
         <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
 
+
+        <button>
+            <a href="/dashboard">
+                Voltar
+            </a>
+        </button>
     </form>
 @stop

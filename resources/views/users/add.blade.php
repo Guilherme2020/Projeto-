@@ -3,7 +3,6 @@
 @include('layout.header_admin')
 
 @section('conteudo')
-<div class="container-fluid">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
@@ -32,7 +31,7 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label">Cpf</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="cpf" value="{{ old('cpf') }}">
+                                <input type="text" class="form-control" id="cpf" name="cpf" value="{{ old('cpf') }}">
                             </div>
                         </div>
                         <div class="form-group">
@@ -49,7 +48,16 @@
                             </div>
                         </div>
 
+                        <div class ="form-group">
+                            <label class="col-md-4 control-label">Tipo de usuário</label>
+                            <div class="col-md-6">
+                                <input type="radio" name="tipo" value="C" checked>
+                                Coordenador <br />
+                                <input type="radio" name="tipo" value="G">
+                                Gerente <br />
+                            </div>
 
+                        </div>
                         <div class="form-group">
                             <label class="col-md-4 control-label">Endereço de Email</label>
                             <div class="col-md-6">
@@ -57,12 +65,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">Nome do usuario</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="username" value="{{ old('username') }}">
-                            </div>
-                        </div>
+
 
                         <div class="form-group">
                             <label class="col-md-4 control-label">Senha</label>
@@ -81,7 +84,7 @@
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Cadastrar
+                                    <span class="glyphicon glyphicon-ok"></span> Cadastrar
                                 </button>
                             </div>
                         </div>
@@ -90,5 +93,11 @@
             </div>
         </div>
     </div>
-</div>
+    <script type="text/javascript">
+        $(document).ready(function(){
+           //
+            $("#cpf").inputmask("999.999.999-99");
+           //
+        });
+    </script>
 @endsection

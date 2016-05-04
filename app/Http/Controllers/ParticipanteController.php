@@ -4,6 +4,7 @@ namespace certificado\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use certificado\Participante;
+use Illuminate\Support\Facades\DB;
 use Request;
 
 	class ParticipanteController extends Controller{
@@ -11,7 +12,9 @@ use Request;
 		public function index(){
 
 			$header = Auth::user()['tipo'] == 'C' ? 'layout.header_coordenador' : 'layout.header_admin';
-			$participantes = Participante::all();
+			$participantes = DB::select('SELECT DISTINCT p.* FROM participante as p,inscricao as i,evento as e
+       		WHERE i.participante_id = p.id and i.evento_id = e.id and e.user_id = ?	',[Auth::user()->id]);
+			#return $participantes;
 			return view('participante.index',compact('participantes', 'header'));
 		}
 
@@ -39,5 +42,42 @@ use Request;
 		public function novo(){
 			return view('participante.form_add');
 		}
+
+		public function edit($id){
+			$participante = Participante::find($id);
+
+			return view("participante.form_edit")->with('participante',$participante);
+		}
+
+		public function update($id){
+			$id = Request::route('id');
+			$participante = Participante::find($id);
+
+
+			// peGANDO OS DADOS DO FORMULARIO
+
+			$matricula = Request::input('matricula');
+			$participante->matricula = $matricula;
+
+			$nome = Request::input('nome');
+			$participante->nome= $nome;
+
+			$cpf= Request::input('cpf');
+			$participante->cpf = $cpf;
+
+			$email = Request::input('email');
+			$participante->email = $email;
+			// salvar no banco
+			$participante->save();
+
+			return redirect("dashboard");
+
+		}
+
+		public function delete($id){
+			Participante::find($id)->delete();
+			return redirect("dashboard");
+		}
+
 	}
  ?>

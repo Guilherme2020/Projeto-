@@ -4,6 +4,6 @@
         <li><a href="/participante">Listagem de Participantes</a></li>
         <li><a href="/participante/novo">Cadastrar Novo Participante</a></li>
         <li><a href="/evento/add">Cadastrar Evento</a></li>
-        <li><a href="users/add">Cadastrar Coordenador</a></li>
+        <li><a href="/users/add">Cadastrar Usuario</a></li>
     </ul>
 @endsection
